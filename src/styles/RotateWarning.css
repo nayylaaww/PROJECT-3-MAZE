@@ -1,0 +1,30 @@
+.rotate-warning {
+  position: fixed;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.9);
+  color: #fff;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.rotate-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.rotate-content p {
+  font-size: 1.2rem;
+  max-width: 300px;
+}
+
+@media (max-width: 480px) {
+  .rotate-content p {
+    font-size: 1rem;
+  }
+}

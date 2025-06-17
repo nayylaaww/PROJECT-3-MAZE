@@ -1,0 +1,15 @@
+.App {
+  text-align: center;
+  padding: 20px;
+  background-color: #383c44; /* Warna latar belakang sedikit lebih terang dari body */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.App h1 {
+  color: #61dafb; /* Warna biru muda */
+}
+
+.App p {
+  font-size: 1.1em;
+}
