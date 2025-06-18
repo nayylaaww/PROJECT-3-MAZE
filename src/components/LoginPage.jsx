@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
-import { auth, googleProvider } from '../firebase';
+import { auth, googleProvider, db } from '../firebase';
+import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore'; 
 import '../styles/login.css';
-import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -16,41 +16,87 @@ const LoginPage = () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      // Simpan info user ke localStorage untuk penggunaan di MazeGame
-      localStorage.setItem('currentUser', JSON.stringify({ email: user.email }));
-      navigate('/');
-    } catch (err) {
-      console.error(err);
-      setError(err.message);
-    }
-  };
 
-    const handleGoogleLogin = async () => {
-      try {
-        const result = await signInWithPopup(auth, googleProvider);
-        const user = result.user;
+      // Ambil data dari Firestore
+      const q = query(collection(db, 'users'), where('email', '==', user.email));
+      const querySnapshot = await getDocs(q);
 
-        const username = user.displayName || user.email.split('@')[0] || 'Guest';
+      if (!querySnapshot.empty) {
+        const userData = querySnapshot.docs[0].data();
+
+        if (!userData.isActive) {
+          setError('Akun ini telah diblokir.');
+          return;
+        }
 
         localStorage.setItem(
           'currentUser',
-          JSON.stringify({ email: user.email, username })
+          JSON.stringify({
+            email: user.email,
+            username: userData.username
+          })
         );
 
         navigate('/');
-      } catch (err) {
-        console.error(err);
-        setError(err.message);
+      } else {
+        setError('User tidak ditemukan di database.');
       }
-    };
+    } catch (err) {
+      console.error(err);
+      setError('Email atau password salah.');
+    }
+  };
 
 
-return (
-  <div className="login-container">
-        <Link to="/">
-         <img src="/back-icon.svg" alt="Back" className="back-icon" />
-        </Link>
-    <div className="login-form-wrapper">
+const handleGoogleLogin = async () => {
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+    const user = result.user;
+    const username = user.displayName || user.email.split('@')[0] || 'Guest';
+
+    const userRef = doc(db, 'users', user.uid);
+    const userSnap = await getDoc(userRef);
+
+    if (userSnap.exists()) {
+      const userData = userSnap.data();
+      if (!userData.isActive) {
+        setError('Akun ini telah diblokir.');
+        return;
+      }
+
+      localStorage.setItem(
+        'currentUser',
+        JSON.stringify({ email: user.email, username: userData.username })
+      );
+    } else {
+      // Buat akun baru jika belum ada
+      await setDoc(userRef, {
+        email: user.email,
+        username,
+        isActive: true,
+        createdAt: serverTimestamp()
+      });
+
+      localStorage.setItem(
+        'currentUser',
+        JSON.stringify({ email: user.email, username })
+      );
+    }
+
+    navigate('/');
+  } catch (err) {
+    console.error(err);
+    setError('Login gagal. Silakan coba lagi.');
+  }
+};
+
+
+  return (
+    <div className="login-container">
+      <Link to="/">
+        <img src="/back-icon.svg" alt="Back" className="back-icon" />
+      </Link>
+      <div className="login-form-wrapper">
         <form className="login-form" onSubmit={handleLogin}>
           {error && <p style={{ color: 'red' }}>{error}</p>}
 
@@ -69,6 +115,7 @@ return (
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+
           <div className="login-button-row">
             <button type="submit" className="btn primary">LOGIN</button>
             <button type="button" onClick={() => navigate('/register')} className="btn primary">SIGN-IN</button>
@@ -80,9 +127,9 @@ return (
             </button>
           </div>
         </form>
+      </div>
     </div>
-  </div>
-);
+  );
 };
 
 export default LoginPage;

@@ -19,7 +19,7 @@ body, html {
   justify-content: center;
   align-items: center;
 
-  background-image: url('/bg-lannding.svg'); 
+  background-image: url('/bg-lannding.png'); 
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover; 
@@ -38,7 +38,6 @@ body, html {
   padding: 1.5rem 1rem;
   font-size: 1.95rem;
   line-height: 1;
-  border-radius: 1rem;
   border: none;
   cursor: pointer;
   transition: 0.2s all ease-in-out;

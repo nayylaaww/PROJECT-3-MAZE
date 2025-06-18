@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase';
-import '../styles/login.css'; // Sudah benar
+import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
+import { auth, db } from '../firebase';
+import '../styles/login.css';
 
 const RegisterPage = () => {
   const [username, setUsername] = useState('');
@@ -16,6 +17,14 @@ const RegisterPage = () => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
+
+      await setDoc(doc(db, 'users', user.uid), {
+        username,
+        email: user.email,
+        isActive: true,
+        createdAt: serverTimestamp(),
+      });
+
       localStorage.setItem('currentUser', JSON.stringify({ username, email: user.email }));
       navigate('/');
     } catch (err) {
@@ -25,9 +34,9 @@ const RegisterPage = () => {
   };
 
   return (
-<div className="login-container">
-  <div className="login-form-wrapper register-form-wrapper">
-    <form className="login-form" onSubmit={handleRegister}>
+    <div className="login-container">
+      <div className="login-form-wrapper register-form-wrapper">
+        <form className="login-form" onSubmit={handleRegister}>
           {error && <p style={{ color: 'red' }}>{error}</p>}
 
           <input

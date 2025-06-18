@@ -6,6 +6,7 @@ import RegisterPage from './components/RegisterPage';
 import ProfilePage from './components/ProfilePage';
 import LeaderboardPage from './components/LeaderboardPage';
 import RotateWarning from './components/RotateWarning'; 
+import AdminPanel from './components/AdminPanel';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/register' element={<RegisterPage />} />
           <Route path='/profile' element={<ProfilePage />} />
           <Route path='/leaderboard' element={<LeaderboardPage />} />
+          <Route path='/adminpanel' element={<AdminPanel />} />
         </Routes>
       </Router>
     </>

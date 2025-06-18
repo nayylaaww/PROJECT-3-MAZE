@@ -53,7 +53,7 @@ const ProfilePage = () => {
         <h2>{userData.username}</h2>
         <p>{userData.email}</p>
 
-        <h3>Score History</h3>
+        <h3 className='sh'>" Score History " </h3>
         {scoreHistory.length === 0 ? (
           <p>Belum ada skor yang tercatat.</p>
         ) : (

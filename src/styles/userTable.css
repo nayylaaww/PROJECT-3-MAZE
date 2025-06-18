@@ -1,0 +1,81 @@
+.user-table-container {
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 1000px;
+  background-color: #ffffffd4;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+  padding: 1rem;
+}
+
+.user-table-container h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color: #3b3b3b;
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.user-table th,
+.user-table td {
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 1rem;
+}
+
+.user-table thead {
+  background-color: #6f8ff8;
+  color: white;
+}
+
+.user-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.ban-button,
+.unban-button {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.ban-button {
+  background-color: #ff4d4f;
+  color: white;
+}
+
+.ban-button:hover {
+  background-color: #e02424;
+}
+
+.unban-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.unban-button:hover {
+  background-color: #388e3c;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .user-table th,
+  .user-table td {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  .user-table-container h2 {
+    font-size: 1.5rem;
+  }
+}
