@@ -4,90 +4,141 @@
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  background-image: url(/bg-login.svg); /* Background halaman */
+  background-image: url(/bg-login.svg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-/* Wrapper bergambar login form */
+/* Wrapper gambar login form */
 .login-form-wrapper {
-  background-image: url('/c-login.svg'); /* Gambar frame login form */
+  background-image: url('/c-login.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   width: 1500px;
   height: 800px;
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
-/* Form login berada di dalam gambar */
+/* Form login */
 .login-form {
   width: 80%;
   max-width: 350px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  background: transparent; /* transparan, biar nggak nutup gambar */
-  position: relative;
+  background: transparent;
   z-index: 1;
+  position: relative;
+  margin-bottom: -100px;
 }
 
-/* Input Style */
+/* Input */
 .login-form input {
   padding: 0.8rem;
-  border: 1px solid #000000;
   border-radius: 0.75rem;
   font-size: 1rem;
   transition: border-color 0.2s ease-in-out;
-  width: 365px;
+  width: 100%;
+  height: 55px;
   background-color: #7edaf2;
+  opacity: 0.6;
+  color: black;
+}
+
+.login-form input::placeholder {
+  color: #000;  
+  opacity: 0.50;   
+}
+
+.login-form input:hover {
+   background-color: #b9d7dfce;
 }
 
 .login-form input:focus {
   border-color: #024473;
   outline: none;
-
 }
 
-/* Tombol Utama */
-.btn.primary {
-  background-color: #4400ff;
-  color: white;
-  font-weight: bold;
-  padding: 0.8rem;
-  border: none;
-  border-radius: 0.75rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
-  width: 365px;
+.login-form input[type="password"] {
+  margin-bottom: 1rem;
+}
 
+/* Tombol Login + Register sejajar */
+.login-button-row {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.login-button-row .btn {
+  flex: 1;
+  padding: 0.8rem;
+  font-size: 1rem;
+  border-radius: 0.75rem;
+  white-space: nowrap;
+  cursor: pointer;
+  border: none;
+  font-weight: 500;
+  font-family: system-ui, 'Open Sans';
+}
+
+/* Tombol utama */
+.btn.primary {
+  background-color: #dab6af;
+  color: black;
+  height: 55px;
+  opacity: 0.6;
+  color: #000000;
+  text-shadow: 0 0 10px rgb(107, 0, 0);
+  transition: background-color 0.2s ease-in-out;
+  border-radius: 0.75rem;
+  border: none;
+  font-weight: 500;
+  font-family: system-ui, 'Open Sans';
+  font-size: 1rem;
+  width:50%;
 }
 
 .btn.primary:hover {
-  background-color: #015b5e;
+   background-color: #b9d7dfce;
 }
 
 /* Tombol Google */
 .btn.google {
-  background-color: white;
-  color: #024473;
-  border: 1.5px solid #024473;
-  font-weight: bold;
+  background-color: #dab6af;
+  color: #000000;
+  text-shadow: 0 0 10px rgb(107, 0, 0);
+  font-size: 1rem;
   padding: 0.8rem;
   border-radius: 0.75rem;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
+  width: 100%;
+  height: 55px;
+  opacity: 0.6;
+  border: none;
+  font-weight: 500;
+  font-family: system-ui, 'Open Sans';
 }
 
 .btn.google:hover {
-  background-color: #e6f0ff;
+ background-color: #b9d7dfce;
 }
 
-/* Text & Link */
+/* Google di tengah */
+.google-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+/* Text/link bawah */
 .login-form p {
   text-align: center;
   font-size: 0.95rem;
@@ -98,6 +149,26 @@
   font-weight: bold;
   cursor: pointer;
   text-decoration: underline;
+}
+
+.back-icon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 140px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.register-form-wrapper {
+  background-image: url('/bg-sign.svg');
+}
+
+/* Khusus button register di halaman register */
+.register-form-wrapper .btn.primary {
+  margin: 0 auto; /* Biar ke tengah horizontal */
+  display: block;
 }
 
 /* Responsive */
@@ -112,9 +183,13 @@
     width: 90%;
   }
 
-  .login-form input,
+  .login-button-row {
+    flex-direction: column;
+  }
+
   .btn.primary,
-  .btn.google {
+  .btn.google,
+  .login-form input {
     font-size: 0.9rem;
     padding: 0.7rem;
   }

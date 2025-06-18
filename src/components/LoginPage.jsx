@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from '../firebase';
 import '../styles/login.css';
+import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -46,34 +47,39 @@ const LoginPage = () => {
 
 return (
   <div className="login-container">
+        <Link to="/">
+         <img src="/back-icon.svg" alt="Back" className="back-icon" />
+        </Link>
     <div className="login-form-wrapper">
-      <form className="login-form" onSubmit={handleLogin}>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit" className="btn primary">Login</button>
-        <button type="button" onClick={handleGoogleLogin} className="btn google">
-          Login with Google 
-        </button>
-        <p>
-          Belum punya akun?{' '}
-          <span className="link" onClick={() => navigate('/register')}>
-            Register
-          </span>
-        </p>
-      </form>
+        <form className="login-form" onSubmit={handleLogin}>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <div className="login-button-row">
+            <button type="submit" className="btn primary">LOGIN</button>
+            <button type="button" onClick={() => navigate('/register')} className="btn primary">SIGN-IN</button>
+          </div>
+
+          <div className="google-row">
+            <button type="button" onClick={handleGoogleLogin} className="btn google">
+              LOGIN WITH GOOGLE
+            </button>
+          </div>
+        </form>
     </div>
   </div>
 );
