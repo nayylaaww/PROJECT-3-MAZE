@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider, db } from '../firebase';
-import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore'; 
+import { collection, query, where, getDocs } from 'firebase/firestore'; 
 import '../styles/login.css';
 
 const LoginPage = () => {
@@ -24,10 +24,11 @@ const LoginPage = () => {
       if (!querySnapshot.empty) {
         const userData = querySnapshot.docs[0].data();
 
-        if (!userData.isActive) {
-          setError('Akun ini telah diblokir.');
-          return;
-        }
+      if (!userData.isActive) {
+        localStorage.removeItem('currentUser');
+        navigate('/banned'); 
+        return;
+      }
 
         localStorage.setItem(
           'currentUser',

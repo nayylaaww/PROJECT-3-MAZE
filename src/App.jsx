@@ -7,12 +7,15 @@ import ProfilePage from './components/ProfilePage';
 import LeaderboardPage from './components/LeaderboardPage';
 import RotateWarning from './components/RotateWarning'; 
 import AdminPanel from './components/AdminPanel';
+import BannedPage from './components/BannedPage';
+import UserStatusListener from './components/UserStatusListener';
 
 function App() {
   return (
     <>
       <RotateWarning /> 
       <Router>
+        <UserStatusListener /> 
         <Routes>
           <Route path='/' element={<LandingPage />} />
           <Route path='/play' element={<MazeGame />} />
@@ -21,6 +24,8 @@ function App() {
           <Route path='/profile' element={<ProfilePage />} />
           <Route path='/leaderboard' element={<LeaderboardPage />} />
           <Route path='/adminpanel' element={<AdminPanel />} />
+          <Route path='/banned' element={<BannedPage />} />
+
         </Routes>
       </Router>
     </>

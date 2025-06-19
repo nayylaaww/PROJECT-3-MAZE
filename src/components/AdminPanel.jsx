@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import UserTable from './UserTable.jsx';
-// import ScoreTable from './ScoreTable';
+import ScoreTable from './ScoreTable';
 import '../styles/admin.css';
 
 const AdminPanel = () => {

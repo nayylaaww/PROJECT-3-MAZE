@@ -6,7 +6,6 @@ import '../styles/userTable.css';
 const UserTable = () => {
   const [users, setUsers] = useState([]);
 
-  // Ambil data user dari Firestore
   const fetchUsers = async () => {
     try {
       const snapshot = await getDocs(collection(db, 'users'));
@@ -24,16 +23,22 @@ const UserTable = () => {
     fetchUsers();
   }, []);
 
-  // Fungsi ban user
   const handleBan = async (id) => {
-    await updateDoc(doc(db, 'users', id), { banned: true });
-    fetchUsers(); // refresh
+    try {
+      await updateDoc(doc(db, 'users', id), { isActive: false });
+      fetchUsers();
+    } catch (err) {
+      console.error('Gagal mem-ban user:', err);
+    }
   };
 
-  // Fungsi unban user
   const handleUnban = async (id) => {
-    await updateDoc(doc(db, 'users', id), { banned: false });
-    fetchUsers(); // refresh
+    try {
+      await updateDoc(doc(db, 'users', id), { isActive: true });
+      fetchUsers();
+    } catch (err) {
+      console.error('Gagal unban user:', err);
+    }
   };
 
   return (
@@ -56,9 +61,9 @@ const UserTable = () => {
               <tr key={user.id}>
                 <td>{user.email}</td>
                 <td>{user.username || '-'}</td>
-                <td>{user.banned ? 'Banned' : 'Aktif'}</td>
+                <td>{user.isActive === false ? 'Banned' : 'Aktif'}</td>
                 <td>
-                  {user.banned ? (
+                  {user.isActive === false ? (
                     <button className="unban-button" onClick={() => handleUnban(user.id)}>Unban</button>
                   ) : (
                     <button className="ban-button" onClick={() => handleBan(user.id)}>Ban</button>
