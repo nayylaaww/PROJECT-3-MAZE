@@ -33,7 +33,7 @@ const LeaderboardPage = () => {
         <img src="/back-icon.svg" alt="Back" />
       </Link> */}
 
-      <h1 className="leaderboard-title">Leaderboard - {selectedMode} Mode</h1>
+      <h1 className="leaderboard-title"> {selectedMode} Mode</h1>
 
       <div className="mode-selector">
         <select value={selectedMode} onChange={(e) => setSelectedMode(e.target.value)}>

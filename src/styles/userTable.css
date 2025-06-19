@@ -5,8 +5,10 @@
   background-color: #ffffffd4;
   border-radius: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  overflow-x: auto;
+  overflow-x: auto; /* biar scroll horizontal muncul kalau sempit */
   padding: 1rem;
+  max-height: 75vh; /* batas tinggi table */
+  overflow-y: auto; /* scroll vertikal jika terlalu panjang */
 }
 
 .user-table-container h2 {
@@ -19,7 +21,7 @@
 .user-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 600px;
+  min-width: 600px; 
 }
 
 .user-table th,
@@ -28,6 +30,7 @@
   text-align: center;
   border-bottom: 1px solid #e0e0e0;
   font-size: 1rem;
+  white-space: nowrap;
 }
 
 .user-table thead {
@@ -67,15 +70,92 @@
   background-color: #388e3c;
 }
 
+.back-button {
+  margin-bottom: 1rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #024473;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.back-button:hover {
+  background-color: #01325d;
+}
+
+/* Scrollbar style */
+.user-table-container::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.user-table-container::-webkit-scrollbar-thumb {
+  background-color: #cccccc;
+  border-radius: 10px;
+}
+
+.admin-panel-wrapper {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.back-button-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+  padding-right: 1rem;
+}
+
+
 /* Responsive */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .user-table-container h2 {
+    font-size: 1.6rem;
+  }
+
   .user-table th,
   .user-table td {
-    padding: 0.6rem;
-    font-size: 0.9rem;
+    padding: 0.8rem;
+    font-size: 0.95rem;
+  }
+
+  .ban-button,
+  .unban-button {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-table-container {
+    padding: 0.8rem;
   }
 
   .user-table-container h2 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+  }
+
+  .user-table th,
+  .user-table td {
+    padding: 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  .ban-button,
+  .unban-button {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.5rem;
+  }
+
+  .back-button {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 0.7rem;
   }
 }
