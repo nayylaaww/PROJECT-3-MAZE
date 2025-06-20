@@ -1,10 +1,15 @@
+@font-face {
+  font-family: "Monument" ;
+  src: url('/fonts/MonumentExtended-Regular.otf') format('truetype');
+}
+
 .login-container {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  background-image: url(/bg-login.svg);
+  background-color: #19174d;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -42,17 +47,25 @@
   padding: 0.8rem;
   border-radius: 0.75rem;
   font-size: 1rem;
+  font-family: "open sans";
   transition: border-color 0.2s ease-in-out;
   width: 100%;
   height: 55px;
-  background-color: #7edaf2;
-  opacity: 0.6;
-  color: black;
+  background-color: #d7fdff;
+  opacity: 0.9;
+  color: #19174d;
+      text-shadow:
+    2px 2px 4px rgba(0, 0, 0, 0.5),
+    -2px -2px 4px rgba(255, 255, 255, 0.3);
+  
 }
 
 .login-form input::placeholder {
-  color: #000;  
-  opacity: 0.50;   
+  color: #19174d;
+    text-shadow:
+    2px 2px 4px rgba(0, 0, 0, 0.6),
+    -2px -2px 4px rgba(255, 255, 255, 0.3);
+  opacity: 0.6;   
 }
 
 .login-form input:hover {
@@ -90,18 +103,20 @@
 
 /* Tombol utama */
 .btn.primary {
-  background-color: #dab6af;
+  background-color: #d7fdff;
   color: black;
   height: 55px;
-  opacity: 0.6;
+  opacity: 0.9;
   color: #000000;
-  text-shadow: 0 0 10px rgb(107, 0, 0);
+  text-shadow:
+    2px 2px 4px rgba(0, 0, 0, 0.4),
+    -2px -2px 4px rgba(255, 255, 255, 0.3);
   transition: background-color 0.2s ease-in-out;
   border-radius: 0.75rem;
   border: none;
-  font-weight: 500;
-  font-family: system-ui, 'Open Sans';
-  font-size: 1rem;
+  font-weight: bold;
+  font-family: 'Open Sans';
+  font-size: 1.4rem;
   width:50%;
 }
 
@@ -111,20 +126,23 @@
 
 /* Tombol Google */
 .btn.google {
-  background-color: #dab6af;
+  background-color: #d7fdff;
   color: #000000;
-  text-shadow: 0 0 10px rgb(165, 62, 190);
-  font-size: 1rem;
+   text-shadow:
+    2px 2px 4px rgba(0, 0, 0, 0.4),
+    -2px -2px 4px rgba(255, 255, 255, 0.3);
+  font-size: 1.4rem;
   padding: 0.8rem;
   border-radius: 0.75rem;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
-  width: 100%;
+  width: 85%;
   height: 55px;
-  opacity: 0.6;
+  opacity: 0.9;
   border: none;
-  font-weight: 500;
-  font-family: system-ui, 'Open Sans';
+  font-weight: bold;
+  font-family: 'Open Sans';
+  margin-left: 25px;
 }
 
 .btn.google:hover {
@@ -163,6 +181,7 @@
 
 .register-form-wrapper {
   background-image: url('/bg-sign.svg');
+  color: white;
 }
 
 /* Khusus button register di halaman register */

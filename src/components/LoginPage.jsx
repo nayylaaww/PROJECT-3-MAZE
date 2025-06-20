@@ -99,6 +99,8 @@ const handleGoogleLogin = async () => {
       </Link>
       <div className="login-form-wrapper">
         <form className="login-form" onSubmit={handleLogin}>
+
+
           {error && <p style={{ color: 'red' }}>{error}</p>}
 
           <input

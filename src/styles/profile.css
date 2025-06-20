@@ -5,12 +5,12 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(to right, #024473, #cacbfe);
+  background-image: url(/bg-prof.svg);
   padding: 1rem;
 }
 
 .profile-card {
-  background: white;
+  background-color: #19174d;
   border-radius: 1rem;
   padding: 2rem;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
@@ -25,17 +25,16 @@
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 1rem;
-  border: 4px solid #024473;
 }
 
 .profile-card h2 {
   margin: 0.5rem 0 0.25rem;
-  color: #02736a;
+  color: #d7fdff;
 }
 
 .profile-card p {
   margin: 0.25rem 0;
-  color: #9c35b1;
+  color: #d7fdff;
 }
 
 .score-info {
@@ -48,19 +47,23 @@
 }
 
 .logout-btn {
-  background-color: #c67de0;
-  color: white;
+  background-color: #d7fdff;
+  color: #19174d;
+  text-shadow:
+    2px 2px 4px rgba(0, 0, 0, 0.5),
+    -2px -2px 4px rgba(255, 255, 255, 0.3);
   padding: 0.6rem 1.2rem;
   border: none;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.4rem;
+  font-family: 'Open Sans', sans-serif;
   transition: background 0.3s ease;
   margin-top: 1rem;
-
+  font-weight: bold
 }
 
 .logout-btn:hover {
-  background-color: #012b50;
+     background-color: #b9d7dfce;
 }
 
 .score-table-container {
@@ -83,7 +86,7 @@
 }
 
 .score-table thead {
-  background: linear-gradient(#310092, #8c52ff);
+  background-color: #19174d;;
   color: white;
 }
 
@@ -92,7 +95,13 @@
 }
 
 .sh{
-  color: rgb(0, 113, 128);
+  color: #d7fdff;
+    text-shadow:
+    2px 2px 4px rgba(0, 0, 0, 0.5),
+    -2px -2px 4px rgba(255, 255, 255, 0.3);
+    font-weight: bold ;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
 }
 
 @media (max-width: 500px) {
