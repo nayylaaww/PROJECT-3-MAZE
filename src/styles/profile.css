@@ -7,6 +7,7 @@
   min-height: 100vh;
   background-image: url(/bg-prof.svg);
   padding: 1rem;
+  background-repeat: no-repeat;
 }
 
 .profile-card {

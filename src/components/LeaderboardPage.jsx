@@ -30,7 +30,7 @@ const LeaderboardPage = () => {
   return (
     <div className="leaderboard-container">
       {/* <Link to="/" className="back-btn">
-        <img src="/back-icon.svg" alt="Back" />
+        <img src="/back-icon..png" alt="Back" />
       </Link> */}
 
       <h1 className="leaderboard-title"> {selectedMode} Mode</h1>

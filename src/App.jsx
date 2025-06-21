@@ -9,12 +9,14 @@ import RotateWarning from './components/RotateWarning';
 import AdminPanel from './components/AdminPanel';
 import BannedPage from './components/BannedPage';
 import UserStatusListener from './components/UserStatusListener';
+import CloseButton from './components/CloseButton';
 
 function App() {
   return (
     <>
       <RotateWarning /> 
       <Router>
+        <CloseButton />
         <UserStatusListener /> 
         <Routes>
           <Route path='/' element={<LandingPage />} />

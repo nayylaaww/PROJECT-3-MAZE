@@ -1,10 +1,8 @@
 /* Leaderboard page layout */
 .leaderboard-container {
   min-height: 100vh;
-  background-color: #171751;
-  background-image: url('/ornamen-kiri.svg'), url('/ornamen-kanan.svg'), url('/ornamen-bawah.svg');
+  background-image: url(/bg-rank.svg);
   background-repeat: no-repeat;
-  background-position: top left, top right, bottom center;
   padding: 2rem 1rem;
   display: flex;
   flex-direction: column;
@@ -18,31 +16,39 @@
   background-size: cover;
   background-position: center;
   padding: 1rem 3rem;
-  font-size: 3.5rem;
-  color: #e7fdff;
-  text-shadow: 0 0 10px #89e9ff;
+  font-size: 7rem;
+  color: #d7fdff;
+  text-shadow:
+    2px 2px 4px rgba(0, 0, 0, 0.9),
+    -2px -2px 4px rgba(255, 255, 255, 0.3);
   font-weight: 900;
   border-radius: 0.5rem;
-  margin-top: 2rem;
+  margin-top: 0rem;
+  text-transform: uppercase;
 }
 
 /* Dropdown dengan style custom */
 .mode-selector {
-  margin-top: 1.5rem;
-  background-color: #e7fdff;
+  margin-top: -1rem;
+  background-color: #d7fdff;
   padding: 0.4rem 1.2rem;
-  border-radius: 0.5rem;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
 }
 
 .mode-selector select {
   border: none;
   background: transparent;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: bold;
+  background-color: #d7fdff;
   color: #0e1b38;
   outline: none;
   cursor: pointer;
+  letter-spacing: 3px;
+    text-shadow:
+    2px 2px 4px rgba(0, 0, 0, 0.5),
+    -2px -2px 4px rgba(255, 255, 255, 0.3);
 }
 
 /* Table wrapper styling */
@@ -73,13 +79,15 @@
 }
 
 .leaderboard-table thead {
-  background: #350d8f;
+  background: #5352529a;
   color: white;
 }
 
 .leaderboard-table tbody tr:nth-child(even) {
   background-color: #f2f2f2;
 }
+
+
 
 /* Responsive tweaks */
 @media (max-width: 768px) {
