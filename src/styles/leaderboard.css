@@ -1,8 +1,8 @@
-/* Leaderboard page layout */
 .leaderboard-container {
   min-height: 100vh;
   background-image: url(/bg-rank.svg);
   background-repeat: no-repeat;
+  background-size: cover;
   padding: 2rem 1rem;
   display: flex;
   flex-direction: column;
@@ -10,9 +10,9 @@
   overflow-x: hidden;
 }
 
-/* Judul atas "EASY MODE" */
+/* Judul atas */
 .leaderboard-title {
-  background-image: url('/mode-bg.svg'); /* tambahkan pattern gambar */
+  background-image: url('/mode-bg.svg');
   background-size: cover;
   background-position: center;
   padding: 1rem 3rem;
@@ -27,42 +27,59 @@
   text-transform: uppercase;
 }
 
-/* Dropdown dengan style custom */
 .mode-selector {
   margin-top: -1rem;
+  display: flex;
+  justify-content: center;
   background-color: #d7fdff;
-  padding: 0.4rem 1.2rem;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-
+  padding: 0.1rem 0.1rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  width: fit-content;
+  
 }
 
 .mode-selector select {
-  border: none;
-  background: transparent;
-  font-size: 1.3rem;
+  width: 150px;
+  height: 40px; /* lebih kecil dari sebelumnya */
+  padding: 0; /* reset padding */
+  font-size: 2rem;
   font-weight: bold;
   background-color: #d7fdff;
   color: #0e1b38;
   outline: none;
   cursor: pointer;
   letter-spacing: 3px;
-    text-shadow:
+  text-shadow: 
     2px 2px 4px rgba(0, 0, 0, 0.5),
     -2px -2px 4px rgba(255, 255, 255, 0.3);
+
+  /* ⬇️ trik geser teks ke atas */
+  transform: translateY(-14px);
 }
 
-/* Table wrapper styling */
+
+
+/* Table wrapper with scroll */
 .table-wrapper {
   margin-top: 2rem;
   width: 100%;
   max-width: 850px;
+  max-height: 650px; /* ✅ Batasi tinggi agar bisa scroll */
   background: rgba(255, 255, 255, 0.95);
-  border-radius: 1rem;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;  /* ✅ Scroll vertical aktif */
   overflow-x: auto;
 }
 
-/* Table layout */
+/* Scrollbar styling (opsional) */
+.table-wrapper::-webkit-scrollbar {
+  width: 8px;
+}
+.table-wrapper::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+}
+
+/* Table */
 .leaderboard-table {
   width: 100%;
   border-collapse: collapse;
@@ -79,7 +96,7 @@
 }
 
 .leaderboard-table thead {
-  background: #5352529a;
+  background: #9e99da;
   color: white;
 }
 
@@ -87,13 +104,16 @@
   background-color: #f2f2f2;
 }
 
-
-
-/* Responsive tweaks */
+/* Responsive */
 @media (max-width: 768px) {
   .leaderboard-title {
     font-size: 2rem;
     padding: 0.8rem 1.5rem;
+    text-align: center;
+  }
+
+  .mode-selector {
+    margin-top: 0.5rem;
   }
 
   .mode-selector select {
@@ -107,6 +127,6 @@
   }
 
   .table-wrapper {
-    margin-top: 1.5rem;
+    max-height: 300px; /* versi mobile sedikit lebih pendek */
   }
 }

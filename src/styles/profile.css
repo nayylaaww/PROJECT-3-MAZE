@@ -25,7 +25,7 @@
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 1rem;
+  margin-bottom: 1rem; 
 }
 
 .profile-card h2 {
@@ -67,31 +67,43 @@
      background-color: #b9d7dfce;
 }
 
-.score-table-container {
+.profile-score-table-container {
   margin-top: 1.5rem;
+  max-height: 300px; /* ⬅️ batasi tinggi scroll */
+  overflow-y: auto;
   overflow-x: auto;
   width: 100%;
+
 }
 
-.score-table {
+/* Custom scrollbar biar smooth */
+.profile-score-table-container::-webkit-scrollbar {
+  width: 6px;
+}
+.profile-score-table-container::-webkit-scrollbar-thumb {
+  background-color: #999;
+
+}
+
+.profile-score-table {
   width: 100%;
   border-collapse: collapse;
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 0.-1rem;
 }
 
-.score-table th,
-.score-table td {
+.profile-score-table th,
+.profile-score-table td {
   padding: 0.75rem 1rem;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #ddd
 }
 
-.score-table thead {
-  background-color: #19174d;;
+.profile-score-table thead {
+  background-color: #9e99da;
   color: white;
 }
 
-.score-table tbody tr:nth-child(even) {
+.profile-score-table tbody tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
@@ -104,6 +116,15 @@
     font-family: 'Open Sans', sans-serif;
     font-size: 30px;
 }
+
+.profile-score-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.profile-score-table tbody tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
 
 @media (max-width: 500px) {
   .profile-card {
@@ -119,8 +140,8 @@
     width: 100%;
   }
 
-  .score-table th,
-  .score-table td {
+  .profile-score-table th,
+  .profile-score-table td {
     font-size: 0.85rem;
     padding: 0.5rem;
   }

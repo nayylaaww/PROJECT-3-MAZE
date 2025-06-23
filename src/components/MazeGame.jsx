@@ -1,14 +1,28 @@
 import React, { useEffect, useRef, useState } from 'react';
-import '../style.css';
+import '../styles/mazeGame.css';
 import { Maze } from '../utils/Maze'; 
 import { DrawMaze, Player } from '../utils/DrawMaze'; 
 import { useNavigate } from 'react-router-dom';
 import { db } from '../firebase';
 import { collection, addDoc } from 'firebase/firestore';
+import { Howl } from 'howler';
 
 let player, draw, maze, cellSize, sprite, finishSprite;
 
 const MazeGame = () => {
+      const toggleSound = () => {
+    if (soundRef.current) {
+      if (soundOn) {
+        soundRef.current.pause();
+      } else {
+         soundRef.current.play();
+        }        setSoundOn(!soundOn);
+    }
+  };
+
+  const [soundOn, setSoundOn] = useState(true);
+  const soundRef = useRef(null);
+
   const canvasRef = useRef(null);
   const diffSelectRef = useRef(null);
   const messageContainerRef = useRef(null);
@@ -55,7 +69,7 @@ const MazeGame = () => {
   };
 
   const displayVictoryMess = async (moves, difficulty) => {
-    if (movesRef.current) movesRef.current.innerHTML = `You Moved ${moves} Steps.`;
+    if (movesRef.current) movesRef.current.innerHTML = `Kamu Berpindah ${moves} Langkah.`;
     toggleVisibility('Message-Container');
     setMoveCount(moves);
 
@@ -73,7 +87,25 @@ const MazeGame = () => {
     }
   };
 
+    useEffect(() => {
+    // Load dan play backsound
+    const sound = new Howl({
+      src: ['/sound/magical.mp3'], // pastikan file mp3 ada di public/sounds/
+      loop: true,
+      volume: 0.4,
+    });
+
+    sound.play();
+    soundRef.current = sound;
+
+    return () => {
+      sound.stop(); // stop saat komponen unmount
+    };
+  }, []);
+
+
   useEffect(() => {
+
     const storedUser = JSON.parse(localStorage.getItem('currentUser'));
     if (storedUser?.username) {
       setUsername(storedUser.username);
@@ -181,19 +213,33 @@ const MazeGame = () => {
 
   return (
     <div id="page">
-      <div className="user-banner">
+      {/* <div className="user-banner">
         <p>Logged in as <strong>{username}</strong></p>
         <button onClick={() => navigate('/')} className="back-button">⬅ Back</button>
-      </div>
+      </div> */}
 
       <div id="Message-Container" ref={messageContainerRef}>
         <div id="message">
           <h1>Congratulations!</h1>
           <p>You are done.</p>
           <p id="moves" ref={movesRef}></p>
-          <input id="okBtn" type="button" value="Cool!" onClick={() => toggleVisibility('Message-Container')} />
+          <input id="okBtn" type="button" value="Next" onClick={() => toggleVisibility('Message-Container')} />
         </div>
       </div>
+
+      <div style={{ position: 'absolute', top: '1rem', left: '1rem', zIndex: 10 }}>
+  <button onClick={toggleSound} style={{
+    backgroundColor: '#d7fdff',
+    border: 'none',
+    borderRadius: '10px',
+    padding: '0.5rem 1rem',
+    fontWeight: 'bold',
+    cursor: 'pointer'
+  }}>
+    {soundOn ? '🔊 Sound ON' : '🔇 Sound OFF'}
+  </button>
+</div>
+
 
       <div id="menu">
         <div className="custom-select">
@@ -219,7 +265,7 @@ const MazeGame = () => {
         </div>
       </div>
 
-      <p id="instructions">Gunakan tombol panah untuk menggerakkan kunci ke rumah!</p>
+      <p id="instructions">Gunakan tombol panah untuk menggerakkan energy ball ke portal!</p>
     </div>
   );
 };

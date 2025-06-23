@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider, db } from '../firebase';
-import { collection, query, where, getDocs } from 'firebase/firestore'; 
+import { collection, query, where, getDocs, doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
 import '../styles/login.css';
 
 const LoginPage = () => {
@@ -94,9 +94,6 @@ const handleGoogleLogin = async () => {
 
   return (
     <div className="login-container">
-      <Link to="/">
-        <img src="/back-icon.svg" alt="Back" className="back-icon" />
-      </Link>
       <div className="login-form-wrapper">
         <form className="login-form" onSubmit={handleLogin}>
 
@@ -125,9 +122,9 @@ const handleGoogleLogin = async () => {
           </div>
 
           <div className="google-row">
-            <button type="button" onClick={handleGoogleLogin} className="btn google">
-              LOGIN WITH GOOGLE
-            </button>
+              <button type="button" onClick={handleGoogleLogin} className="btn google">
+                LOGIN WITH <img src="/google-logo.png" alt="Google" className="google-icon" />
+              </button>
           </div>
         </form>
       </div>

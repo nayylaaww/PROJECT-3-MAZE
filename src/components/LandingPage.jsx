@@ -1,17 +1,31 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import '../styles/LandingPage.css';
-import { Link } from 'react-router-dom';
-
-
-const user = JSON.parse(localStorage.getItem('currentUser'));
 
 const LandingPage = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // Cek user saat komponen dimount
+    const storedUser = localStorage.getItem('currentUser');
+    setUser(storedUser ? JSON.parse(storedUser) : null);
+
+    // Listener untuk perubahan localStorage dari tab lain
+    const handleStorageChange = () => {
+      const updatedUser = localStorage.getItem('currentUser');
+      setUser(updatedUser ? JSON.parse(updatedUser) : null);
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
 
   return (
     <div className="landing-container">
-
       <div className="landing-buttons">
         <button
           onClick={() => navigate('/play')}
@@ -36,7 +50,6 @@ const LandingPage = () => {
             <button className="nav-btn">LOGIN</button>
           </Link>
         )}
-
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import '../styles/userTable.css';
 
 const UserTable = () => {
   const [users, setUsers] = useState([]);
-
+  
   const fetchUsers = async () => {
     try {
       const snapshot = await getDocs(collection(db, 'users'));
@@ -41,9 +41,27 @@ const UserTable = () => {
     }
   };
 
+  const [searchTerm, setSearchTerm] = useState('');
+  const filteredUsers = users.filter(user =>
+  user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  (user.username && user.username.toLowerCase().includes(searchTerm.toLowerCase()))
+);
+
+
   return (
-    <div className="user-table-container">
+  <div className="user-table-container">
+    
+    <div className="user-header">
       <h2>Data Pengguna</h2>
+      <input
+        type="text"
+        placeholder="Cari pengguna..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="search-input"
+      />
+    </div>
+    
       <table className="user-table">
         <thead>
           <tr>
@@ -57,7 +75,7 @@ const UserTable = () => {
           {users.length === 0 ? (
             <tr><td colSpan="4">Belum ada user</td></tr>
           ) : (
-            users.map(user => (
+            filteredUsers.map(user => (
               <tr key={user.id}>
                 <td>{user.email}</td>
                 <td>{user.username || '-'}</td>

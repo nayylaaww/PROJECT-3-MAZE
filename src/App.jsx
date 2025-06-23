@@ -10,6 +10,8 @@ import AdminPanel from './components/AdminPanel';
 import BannedPage from './components/BannedPage';
 import UserStatusListener from './components/UserStatusListener';
 import CloseButton from './components/CloseButton';
+import ProtectedAdminRoute from './components/ProtectedAdminRoute';
+import AccessDenied from './components/AccessDenied';
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
         <CloseButton />
         <UserStatusListener /> 
         <Routes>
+          <Route path="/adminpanel" element={ <ProtectedAdminRoute> <AdminPanel /> </ProtectedAdminRoute> }/>
           <Route path='/' element={<LandingPage />} />
           <Route path='/play' element={<MazeGame />} />
           <Route path='/login' element={<LoginPage />} />
@@ -27,6 +30,8 @@ function App() {
           <Route path='/leaderboard' element={<LeaderboardPage />} />
           <Route path='/adminpanel' element={<AdminPanel />} />
           <Route path='/banned' element={<BannedPage />} />
+          <Route path="/access-denied" element={<AccessDenied />} />
+
 
         </Routes>
       </Router>

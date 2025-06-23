@@ -57,8 +57,8 @@ const ProfilePage = () => {
         {scoreHistory.length === 0 ? (
           <p>Belum ada skor yang tercatat.</p>
         ) : (
-          <div className="score-table-container">
-            <table className="score-table">
+          <div className="profile-score-table-container">
+            <table className="profile-score-table">
               <thead>
                 <tr>
                   <th>Difficulty</th>

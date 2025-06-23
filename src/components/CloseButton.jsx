@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-
+import '../styles/closeButton.css'
 
 const CloseButton = () => {
   const location = useLocation();
