@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../firebase';
 import { collection, query, where, orderBy, getDocs } from 'firebase/firestore';
-import '../styles/Leaderboard.css';
+import '../styles/leaderboard.css';
 import { Link } from 'react-router-dom';
 
 const LeaderboardPage = () => {
