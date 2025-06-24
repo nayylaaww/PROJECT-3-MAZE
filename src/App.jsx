@@ -5,7 +5,7 @@ import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import ProfilePage from './components/ProfilePage';
 import LeaderboardPage from './components/LeaderboardPage';
-import RotateWarning from './components/RotateWarning'; 
+// import RotateWarning from './components/RotateWarning'; 
 import AdminPanel from './components/AdminPanel';
 import BannedPage from './components/BannedPage';
 import UserStatusListener from './components/UserStatusListener';
@@ -16,7 +16,7 @@ import AccessDenied from './components/AccessDenied';
 function App() {
   return (
     <>
-      <RotateWarning /> 
+      {/* <RotateWarning />  */}
       <Router>
         <CloseButton />
         <UserStatusListener /> 

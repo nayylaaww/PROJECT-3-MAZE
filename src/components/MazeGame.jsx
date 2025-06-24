@@ -232,11 +232,11 @@ const MazeGame = () => {
     backgroundColor: '#d7fdff',
     border: 'none',
     borderRadius: '10px',
-    padding: '0.5rem 1rem',
+    padding: '0.5rem 0.5rem',
     fontWeight: 'bold',
     cursor: 'pointer'
   }}>
-    {soundOn ? '🔊 Sound ON' : '🔇 Sound OFF'}
+    {soundOn ? '🔊 ON' : '🔇 OFF'}
   </button>
 </div>
 

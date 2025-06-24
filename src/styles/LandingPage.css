@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -14,14 +15,14 @@ body, html {
 .landing-container {
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-
+  
+  /* DESKTOP: Background image yang keren */
   background-image: url('/bg-lannding.svg'); 
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover; 
+  background-size: cover;
 }
 
 .landing-buttons {
@@ -29,8 +30,9 @@ body, html {
   flex-direction: column;
   gap: 3rem;
   width: 240px;
-  margin-top: 320px;
-  margin-right: 850px;
+  /* DESKTOP: Positioning ke kiri */
+  margin-right: 45%;
+  margin-top: 15%;
 }
 
 .landing-btn,
@@ -65,41 +67,56 @@ body, html {
   background-color: #86aab3;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* MOBILE LANDSCAPE - Background polos + center buttons */
+@media (max-width: 1024px) {
   .landing-container {
-    padding: 2rem 1rem;
-    background-size: contain;
+    /* Ganti ke background gradient yang simple tapi tetap matching */
+    background: linear-gradient(135deg, #2d1b69 0%, #11998e 100%);
+    background-image: none; /* Remove background image */
   }
 
   .landing-buttons {
-    margin-top: 100px;
-    width: 100%;
+    margin-right: 0; /* Center the buttons */
+    width: 90%;
+    max-width: 320px;
+    gap: 2.5rem;
+  }
+
+  .landing-btn,
+  .nav-btn {
+    font-size: 1.6rem;
+    padding: 1.3rem 0.9rem;
+    word-spacing: 0.7rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .landing-buttons {
+    width: 85%;
     max-width: 300px;
+    gap: 2rem;
+  }
+
+  .landing-btn,
+  .nav-btn {
+    font-size: 1.4rem;
+    padding: 1.2rem 0.8rem;
+    word-spacing: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-buttons {
+    width: 80%;
+    max-width: 280px;
+    gap: 1.8rem;
   }
 
   .landing-btn,
   .nav-btn {
     font-size: 1.3rem;
-    padding: 1.2rem 0.8rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .landing-container {
-    background-size: cover;
-    background-position: center;
-  }
-
-  .landing-buttons {
-    margin-top: 60px;
-    width: 100%;
-    max-width: 260px;
-  }
-
-  .landing-btn,
-  .nav-btn {
-    font-size: 1.1rem;
-    padding: 1rem 0.6rem;
+    padding: 1.1rem 0.7rem;
+    word-spacing: 0.4rem;
+    letter-spacing: 0.5px;
   }
 }
