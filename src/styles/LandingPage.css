@@ -35,6 +35,7 @@ body, html {
   margin-top: 15%;
 }
 
+
 .landing-btn,
 .nav-btn {
   padding: 1.5rem 1rem;
@@ -73,6 +74,9 @@ body, html {
     /* Ganti ke background gradient yang simple tapi tetap matching */
     background: linear-gradient(135deg, #2d1b69 0%, #11998e 100%);
     background-image: none; /* Remove background image */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
   }
 
   .landing-buttons {
@@ -90,7 +94,7 @@ body, html {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 800px) {
   .landing-buttons {
     width: 85%;
     max-width: 300px;
@@ -99,7 +103,7 @@ body, html {
 
   .landing-btn,
   .nav-btn {
-    font-size: 1.4rem;
+    font-size: 2.1rem;
     padding: 1.2rem 0.8rem;
     word-spacing: 0.5rem;
   }

@@ -37,6 +37,8 @@ const RegisterPage = () => {
     <div className="login-container">
       <div className="login-form-wrapper register-form-wrapper">
         <form className="login-form" onSubmit={handleRegister}>
+              <h1 className="mobile-title">REGISTER</h1> 
+
           {error && <p style={{ color: 'red' }}>{error}</p>}
 
           <input

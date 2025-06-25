@@ -16,7 +16,7 @@ html, body {
 }
 
 #instructions {
-    margin-top: 800px; /* Reduced from 860px */
+    margin-top: 950px; /* Reduced from 860px */
     font-size: 28px; /* Reduced from 47px */
     color: #19174d;
     padding: 0 20px; /* Added padding */
