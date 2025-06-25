@@ -92,44 +92,45 @@ const handleGoogleLogin = async () => {
 };
 
 
-  return (
-    <div className="login-container">
-      <div className="login-form-wrapper">
-        <form className="login-form" onSubmit={handleLogin}>
+return (
+  <div className="login-container">
+    <div className="login-form-wrapper">
+      <form className="login-form" onSubmit={handleLogin}>
+        <h1 className="mobile-title">LOGIN</h1>
 
+        {error && <p style={{ color: 'red' }}>{error}</p>}
 
-          {error && <p style={{ color: 'red' }}>{error}</p>}
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
 
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
 
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+        <div className="login-button-row">
+          <button type="submit" className="btn primary">LOGIN</button>
+          <button type="button" onClick={() => navigate('/register')} className="btn primary">SIGN-IN</button>
+        </div>
 
-          <div className="login-button-row">
-            <button type="submit" className="btn primary">LOGIN</button>
-            <button type="button" onClick={() => navigate('/register')} className="btn primary">SIGN-IN</button>
-          </div>
-
-          <div className="google-row">
-              <button type="button" onClick={handleGoogleLogin} className="btn google">
-                LOGIN WITH <img src="/google-logo.png" alt="Google" className="google-icon" />
-              </button>
-          </div>
-        </form>
-      </div>
+        <div className="google-row">
+          <button type="button" onClick={handleGoogleLogin} className="btn google">
+            LOGIN WITH <img src="/google-logo.png" alt="Google" className="google-icon" />
+          </button>
+        </div>
+      </form>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default LoginPage;

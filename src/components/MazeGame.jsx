@@ -1,3 +1,5 @@
+// MazeGame.jsx (FINAL VERSION with D-Pad movement fix)
+
 import React, { useEffect, useRef, useState } from 'react';
 import '../styles/mazeGame.css';
 import { Maze } from '../utils/Maze'; 
@@ -31,47 +33,37 @@ const MazeGame = () => {
   const navigate = useNavigate();
   const [moveCount, setMoveCount] = useState(0);
   const [difficulty, setDifficulty] = useState('Easy');
-  const [gameStarted, setGameStarted] = useState(false); // Track if game is active
-  const [isMobile, setIsMobile] = useState(false); // Track if on mobile device
+  const [gameStarted, setGameStarted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Detect mobile device
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
+      const isNarrowScreen = window.innerWidth <= 768;
+      const isPortrait = window.innerHeight > window.innerWidth;
+      setIsMobile(isNarrowScreen || isPortrait);
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
-    
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Mobile touch controls
-  const handleTouchMove = (direction) => {
+
+  const movePlayer = (direction) => {
     if (!player || !gameStarted) return;
-    
-    // Simulate keyboard event for existing player system
+
     const keyMap = {
-      'up': 38,    // Arrow Up
-      'down': 40,  // Arrow Down  
-      'left': 37,  // Arrow Left
-      'right': 39  // Arrow Right
+      up: 38,
+      down: 40,
+      left: 37,
+      right: 39,
     };
-    
+
     const keyCode = keyMap[direction];
-    if (keyCode) {
-      // Create synthetic keyboard event
-      const syntheticEvent = new KeyboardEvent('keydown', {
-        keyCode: keyCode,
-        which: keyCode,
-        bubbles: true
-      });
-      
-      // Trigger player movement
-      if (player.keyDown) {
-        player.keyDown(syntheticEvent);
-      }
-    }
+    if (!keyCode) return;
+
+    const fakeEvent = { keyCode };
+    player.handleKey(fakeEvent);
   };
 
   const toggleVisibility = (id) => {
@@ -84,7 +76,7 @@ const MazeGame = () => {
   const makeMaze = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    
+
     if (player) {
       player.unbindKeyDown();
       player = null;
@@ -100,14 +92,14 @@ const MazeGame = () => {
     const e = diffSelectRef.current;
     const level = e.options[e.selectedIndex].value;
     setDifficulty(level);
-    setGameStarted(true); // Mark game as started
-    
+    setGameStarted(true);
+
     const size = sizeByDifficulty[level];
     cellSize = canvas.width / size;
     maze = new Maze(size, size);
     draw = new DrawMaze(maze, ctx, cellSize, finishSprite);
     player = new Player(maze, canvas, cellSize, (moves) => displayVictoryMess(moves, level), sprite);
-    
+
     document.getElementById('mazeContainer').style.opacity = '1';
   };
 
@@ -115,8 +107,8 @@ const MazeGame = () => {
     if (movesRef.current) movesRef.current.innerHTML = `Kamu Berpindah ${moves} Langkah.`;
     toggleVisibility('Message-Container');
     setMoveCount(moves);
-    setGameStarted(false); // Game ended
-    
+    setGameStarted(false);
+
     try {
       await addDoc(collection(db, 'leaderboard'), {
         username,
@@ -132,7 +124,6 @@ const MazeGame = () => {
   };
 
   useEffect(() => {
-    // Load dan play backsound
     const sound = new Howl({
       src: ['/sound/magical.mp3'],
       loop: true,
@@ -140,36 +131,20 @@ const MazeGame = () => {
     });
     sound.play();
     soundRef.current = sound;
-    
-    return () => {
-      sound.stop();
-    };
+    return () => sound.stop();
   }, []);
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (storedUser?.username) {
-      setUsername(storedUser.username);
-    } else {
-      setUsername('Guest');
-    }
+    setUsername(storedUser?.username || 'Guest');
   }, []);
 
   useEffect(() => {
     if (!username) return;
-    
+
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    
-    const rand = (max) => Math.floor(Math.random() * max);
-    const shuffle = (a) => {
-      for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
-      }
-      return a;
-    };
-    
+
     const changeBrightness = (factor, sprite) => {
       const virtCanvas = document.createElement('canvas');
       virtCanvas.width = 500;
@@ -177,70 +152,61 @@ const MazeGame = () => {
       const context = virtCanvas.getContext('2d');
       context.drawImage(sprite, 0, 0, 500, 500);
       const imgData = context.getImageData(0, 0, 500, 500);
-      
       for (let i = 0; i < imgData.data.length; i += 4) {
         imgData.data[i] *= factor;
         imgData.data[i + 1] *= factor;
         imgData.data[i + 2] *= factor;
       }
-      
       context.putImageData(imgData, 0, 0);
       const spriteOutput = new Image();
       spriteOutput.src = virtCanvas.toDataURL();
-      virtCanvas.remove();
       return spriteOutput;
     };
-    
+
     const isComplete = () => {
       if (sprite.complete && finishSprite.complete) {
-        setTimeout(() => {
-          makeMaze();
-        }, 500);
+        setTimeout(() => makeMaze(), 500);
       }
     };
-    
+
     sprite = new Image();
     finishSprite = new Image();
     sprite.src = '/key.png';
-    sprite.crossOrigin = ' ';
     sprite.onload = () => {
       sprite = changeBrightness(1.2, sprite);
       isComplete();
     };
-    
+
     finishSprite.src = '/home.png';
-    finishSprite.crossOrigin = ' ';
     finishSprite.onload = () => {
       finishSprite = changeBrightness(1.1, finishSprite);
       isComplete();
     };
-    
+
     const handleResize = () => {
       const canvas = canvasRef.current;
       const viewEl = document.getElementById('view');
       if (!canvas || !viewEl) return;
-      
+
       const ctx = canvas.getContext('2d');
       const viewWidth = viewEl.offsetWidth;
       const viewHeight = viewEl.offsetHeight;
       const size = Math.min(viewWidth, viewHeight) * 0.99;
-      
+
       ctx.canvas.width = size;
       ctx.canvas.height = size;
-      
+
       if (maze && maze.map()) {
         cellSize = canvas.width / maze.map().length;
       }
-      
       if (player && draw) {
         draw.redrawMaze(cellSize);
         player.redrawPlayer(cellSize);
       }
     };
-    
+
     window.addEventListener('resize', handleResize);
     handleResize();
-    
     return () => window.removeEventListener('resize', handleResize);
   }, [username]);
 
@@ -272,7 +238,7 @@ const MazeGame = () => {
           />
         </div>
       </div>
-      
+
       <div style={{ position: 'absolute', top: '1rem', left: '1rem', zIndex: 10 }}>
         <button onClick={toggleSound} style={{
           backgroundColor: '#d7fdff',
@@ -285,7 +251,7 @@ const MazeGame = () => {
           {soundOn ? '🔊 Sound ON' : '🔇 Sound OFF'}
         </button>
       </div>
-      
+
       <div id="menu">
         <div className="custom-select">
           <select id="diffSelect" ref={diffSelectRef}>
@@ -297,7 +263,7 @@ const MazeGame = () => {
         </div>
         <input id="startMazeBtn" type="button" value="Start" onClick={() => makeMaze()} />
       </div>
-      
+
       <div id="view">
         <div id="mazeContainer">
           <canvas
@@ -310,63 +276,22 @@ const MazeGame = () => {
         </div>
       </div>
 
-      {/* Mobile Touch Controls */}
       {isMobile && gameStarted && (
         <div className="mobile-controls">
           <div className="dpad-container">
-            <button 
-              className="dpad-btn dpad-up"
-              onTouchStart={(e) => {
-                e.preventDefault();
-                handleTouchMove('up');
-              }}
-              onClick={() => handleTouchMove('up')}
-            >
-              ⬆️
-            </button>
-            
+            <button className="dpad-btn dpad-up" onClick={() => movePlayer('up')}>⬆️</button>
             <div className="dpad-horizontal">
-              <button 
-                className="dpad-btn dpad-left"
-                onTouchStart={(e) => {
-                  e.preventDefault();
-                  handleTouchMove('left');
-                }}
-                onClick={() => handleTouchMove('left')}
-              >
-                ⬅️
-              </button>
-              
+              <button className="dpad-btn dpad-left" onClick={() => movePlayer('left')}>⬅️</button>
               <div className="dpad-center"></div>
-              
-              <button 
-                className="dpad-btn dpad-right"
-                onTouchStart={(e) => {
-                  e.preventDefault();
-                  handleTouchMove('right');
-                }}
-                onClick={() => handleTouchMove('right')}
-              >
-                ➡️
-              </button>
+              <button className="dpad-btn dpad-right" onClick={() => movePlayer('right')}>➡️</button>
             </div>
-            
-            <button 
-              className="dpad-btn dpad-down"
-              onTouchStart={(e) => {
-                e.preventDefault();
-                handleTouchMove('down');
-              }}
-              onClick={() => handleTouchMove('down')}
-            >
-              ⬇️
-            </button>
+            <button className="dpad-btn dpad-down" onClick={() => movePlayer('down')}>⬇️</button>
           </div>
         </div>
       )}
-      
+
       <p id="instructions">
-        {isMobile ? 
+        {isMobile ?
           "Gunakan tombol panah di atas untuk menggerakkan energy ball ke portal!" :
           "Gunakan tombol panah untuk menggerakkan energy ball ke portal!"
         }

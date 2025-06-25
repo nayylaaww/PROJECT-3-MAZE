@@ -110,6 +110,7 @@ export function Player(maze, canvas, cellSize, onComplete, sprite = null) {
     const cell = map[coord.x][coord.y];
     let moved = false;
     moves++;
+
     switch (e.keyCode) {
       case 37: case 65: if (cell.w) moved = { x: coord.x - 1, y: coord.y }; break;
       case 38: case 87: if (cell.n) moved = { x: coord.x, y: coord.y - 1 }; break;
@@ -117,6 +118,7 @@ export function Player(maze, canvas, cellSize, onComplete, sprite = null) {
       case 40: case 83: if (cell.s) moved = { x: coord.x, y: coord.y + 1 }; break;
       default: return;
     }
+
     if (moved) {
       remove(coord);
       coord = moved;
@@ -131,6 +133,8 @@ export function Player(maze, canvas, cellSize, onComplete, sprite = null) {
   this.unbindKeyDown = () => {
     window.removeEventListener('keydown', handleKey);
   };
+
+  this.handleKey = handleKey; // ✅ biar bisa dipanggil dari luar (D-Pad / simulasikan key)
 
   draw(coord);
   this.bindKeyDown();

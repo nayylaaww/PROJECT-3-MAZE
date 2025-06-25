@@ -204,6 +204,16 @@
   display: block;
 }
 
+
+.mobile-title {
+  display: none;
+  font-family: "Monument", sans-serif;
+  font-size: 2.5rem;
+  color: #d7fdff;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
 /* Responsive */
 @media (max-width: 600px) {
   .login-form-wrapper {
@@ -225,5 +235,114 @@
   .login-form input {
     font-size: 0.9rem;
     padding: 0.7rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  
+  .login-form-wrapper {
+    width: 90%;
+    height: auto;
+    background-size: contain;
+    background-position: top center;
+    flex-direction: column;
+    padding: 1rem 0;
+  }
+
+  .login-form {
+    width: 90%;
+    max-width: 400px;
+    margin-bottom: 0;
+  }
+
+  .btn.primary,
+  .btn.google {
+    width: 100%;
+    font-size: 1.1rem;
+  }
+
+  .btn.google {
+    margin-left: 0;
+  }
+
+  .back-icon {
+    width: 100px;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .mobile-title {
+    display: block;
+    font-family: "Open Sans";
+    font-size: 2rem;
+    color: #d7fdff;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .login-form-wrapper {
+    background-image: none !important;
+    background-color: #19174d; 
+    flex-direction: column;
+    padding: 2rem;
+  }
+
+  .login-form {
+    margin-bottom: 0;
+    align-items: center;
+    text-align: center;
+  }
+
+  .login-form h1 {
+    font-size: 4rem;
+    font-family: "Open Sans";
+    color: #d7fdff;
+    margin-bottom: 1rem;
+  }
+
+  .back-icon {
+    width: 70px;
+    top: 1rem;
+    right: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mobile-title {
+    display: block;
+    font-family: "Open Sans";
+    font-size: 2rem;
+    color: #d7fdff;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .login-form-wrapper {
+    background-image: none !important;
+    background-color: #19174d; 
+    flex-direction: column;
+    padding: 2rem;
+  }
+
+  .login-form {
+    margin-bottom: 0;
+    align-items: center;
+    text-align: center;
+  }
+
+  .login-form h1 {
+    font-size: 4rem;
+    font-family: "Open Sans";
+    color: #d7fdff;
+    margin-bottom: 1rem;
+  }
+
+  .back-icon {
+    width: 70px;
+    top: 1rem;
+    right: 1rem;
   }
 }
