@@ -11,12 +11,15 @@ html, body {
     left: 0;
     right: 0;
     background-image: url(/bg-game.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     font-family: 'Poppins', sans-serif;
-    overflow: hidden; /* Prevent scrolling issues */
+    overflow: hidden;
 }
 
 #instructions {
-    margin-top: 950px; /* Reduced from 860px */
+    margin-top: 900px; /* Reduced from 860px */
     font-size: 28px; /* Reduced from 47px */
     color: #19174d;
     padding: 0 20px; /* Added padding */
@@ -211,9 +214,9 @@ input:focus, select:focus {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
   background: rgba(25, 23, 77, 0.9);
-  padding: 15px;
+  padding: 25px;
   border-radius: 20px;
   border: 2px solid #d7fdff;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
@@ -530,4 +533,49 @@ input:focus, select:focus {
 /* Smooth ball movement */
 .ball {
     transition: none; /* Remove any existing transitions for smooth manual control */
+}
+
+@media only screen and (max-width: 768px) {
+  html, body {
+    background-image: url(/bg-game.svg) !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center !important;
+
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-controls {
+    display: block;
+  }
+
+    #instructions {
+    margin-top: 1300px; 
+    padding: 0 15px;
+    font-weight: 400;
+    font-size: 50px;
+    }
+
+
+  .dpad-btn {
+    min-width: 50px;
+    min-height: 50px;
+    font-size: 18px;
+  }
+
+  .dpad-container {
+    padding: 70px;
+    margin-bottom: 250px;
+
+  }
+
+    #Message-Container #message {
+    width: 220px;
+    height: 220px;
+    margin-left: -110px;
+    margin-top: -110px;
+    max-width: 80vw;
+    max-height: 85vh;
+  }
 }

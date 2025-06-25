@@ -6,9 +6,12 @@
   align-items: center;
   min-height: 100vh;
   background-image: url(/bg-prof.svg);
-  padding: 1rem;
   background-repeat: no-repeat;
+  background-size: cover;      /* ✅ Biar gambar penuh 1x */
+  background-position: center; /* ✅ Biar nggak geser */
+  padding: 1rem;
 }
+
 
 .profile-card {
   background-color: #19174d;
@@ -145,4 +148,40 @@
     font-size: 0.85rem;
     padding: 0.5rem;
   }
+
+@media (max-width: 768px) {
+  .profile-page {
+    background-size: cover;      /* Tetap penuh di layar kecil */
+    background-repeat: no-repeat;/* Jangan ulang */
+    background-position: center; /* Tengah */
+  }
+
+  .profile-card {
+    padding: 1.2rem;
+  }
+
+  .profile-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .logout-btn {
+    width: 100%;
+  }
+
+  .profile-score-table th,
+  .profile-score-table td {
+    font-size: 0.85rem;
+    padding: 0.5rem;
+  }
+
+  .sh {
+    font-size: 24px;
+    text-align: center;
+  }
 }
+
+
+
+}
+
