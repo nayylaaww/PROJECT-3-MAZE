@@ -24,35 +24,45 @@ const LandingPage = () => {
     };
   }, []);
 
-  return (
-    <div className="landing-container">
-      <div className="landing-buttons">
-        <button
-          onClick={() => navigate('/play')}
-          className="landing-btn play"
-        >
-          PLAY
-        </button>
+    return (
+      <div className="landing-container">
+        <div className="landing-buttons">
+          <button
+            onClick={() => navigate('/play')}
+            className="landing-btn play"
+          >
+            PLAY
+          </button>
 
-        <button
-          onClick={() => navigate('/leaderboard')}
-          className="landing-btn secondary"
-        >
-          RANK
-        </button>
+          <button
+            onClick={() => navigate('/leaderboard')}
+            className="landing-btn secondary"
+          >
+            RANK
+          </button>
 
-        {user ? (
-          <Link to="/profile">
-            <button className="nav-btn">PROFILE</button>
-          </Link>
-        ) : (
-          <Link to="/login">
-            <button className="nav-btn">LOGIN</button>
-          </Link>
-        )}
+          {user ? (
+            <Link to="/profile">
+              <button className="nav-btn">PROFILE</button>
+            </Link>
+          ) : (
+            <Link to="/login">
+              <button className="nav-btn">LOGIN</button>
+            </Link>
+          )}
+
+          {user?.email === 'narazahra86@gmail.com' && (
+            <button
+              onClick={() => navigate('/adminpanel')}
+              className="landing-btn admin"
+            >
+              ADMIN
+            </button>
+          )}
+        </div>
       </div>
-    </div>
-  );
+    );
+
 };
 
 export default LandingPage;

@@ -28,7 +28,7 @@ body, html {
 .landing-buttons {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2.7rem;
   width: 240px;
   /* DESKTOP: Positioning ke kiri */
   margin-right: 45%;
@@ -68,29 +68,52 @@ body, html {
   background-color: #86aab3;
 }
 
+.landing-btn.admin {
+  background-color: #d7fdff;
+  font-weight: bold;
+  font-size: 1.95rem;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  margin-top: 1rem;
+  color: black;
+  text-shadow:
+    2px 2px 4px rgba(0, 0, 0, 0.6),
+    -2px -2px 4px rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  width: 240px;
+  height: 75px;
+}
+
+.landing-btn.admin:hover {
+  background-color:  #86aab3;
+}
+
+
 /* MOBILE LANDSCAPE - Background polos + center buttons */
 @media (max-width: 1024px) {
   .landing-container {
-    /* Ganti ke background gradient yang simple tapi tetap matching */
     background: linear-gradient(135deg, #2d1b69 0%, #11998e 100%);
-    background-image: none; /* Remove background image */
+    background-image: none;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
   }
 
   .landing-buttons {
-    margin-right: 0; /* Center the buttons */
+    margin-right: 0;
     width: 90%;
     max-width: 320px;
     gap: 2.5rem;
   }
 
   .landing-btn,
-  .nav-btn {
+  .nav-btn,
+  .landing-btn.admin {
     font-size: 1.6rem;
     padding: 1.3rem 0.9rem;
     word-spacing: 0.7rem;
+    width: 100%;
+    height: auto;
   }
 }
 
@@ -102,15 +125,17 @@ body, html {
   }
 
   .landing-btn,
-  .nav-btn {
+  .nav-btn,
+  .landing-btn.admin {
     font-size: 2.1rem;
     padding: 1.2rem 0.8rem;
     word-spacing: 0.5rem;
+    width: 100%;
+    height: auto;
   }
 }
 
 @media (max-width: 480px) {
-
   .landing-buttons {
     width: 80%;
     max-width: 280px;
@@ -118,10 +143,13 @@ body, html {
   }
 
   .landing-btn,
-  .nav-btn {
+  .nav-btn,
+  .landing-btn.admin {
     font-size: 1.3rem;
     padding: 1.1rem 0.7rem;
     word-spacing: 0.4rem;
     letter-spacing: 0.5px;
+    width: 100%;
+    height: auto;
   }
 }

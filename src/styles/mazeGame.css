@@ -543,9 +543,7 @@ input:focus, select:focus {
     background-position: center !important;
 
   }
-}
-
-@media (max-width: 768px) {
+  
   .mobile-controls {
     display: block;
   }
@@ -566,7 +564,7 @@ input:focus, select:focus {
 
   .dpad-container {
     padding: 70px;
-    margin-bottom: 250px;
+    margin-bottom: 320px;
 
   }
 

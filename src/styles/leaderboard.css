@@ -1,8 +1,9 @@
 .leaderboard-container {
   min-height: 100vh;
-  background-image: url(/bg-rank.svg);
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-image: url(/bg-rank.svg) !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: center !important;
   padding: 2rem 1rem;
   display: flex;
   flex-direction: column;
@@ -10,7 +11,8 @@
   overflow-x: hidden;
 }
 
-/* Judul atas */
+
+
 .leaderboard-title {
   background-image: url('/mode-bg.svg');
   background-size: cover;
@@ -126,9 +128,8 @@
 
 @media (max-width: 768px) {
   .leaderboard-container {
-    padding: 1rem 0.5rem;
     background-image: none !important;
-    background-color: #19174d;
+    background-color: #19174d !important; /* ganti sesuai tema kamu */
   }
 
   .leaderboard-title {
@@ -152,5 +153,15 @@
   .leaderboard-table td {
     font-size: 0.75rem;
     padding: 0.3rem;
+  }
+}
+
+@media (min-width: 769px) {
+  .leaderboard-container {
+    background-image: url(/bg-rank.svg) !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-color: transparent !important; /* reset warna */
   }
 }
